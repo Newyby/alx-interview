@@ -1,24 +1,31 @@
 #!/usr/bin/python3
+
 """
-    A method that determines if all the boxes can be opened.
-        - Prototype: def canUnlockAll(boxes)
-        - boxes is a list of lists
-        - Return True if all boxes can be opened, else return False
+This module contains the solution to the
+Inteview question of lockboxes
 """
 
-def canUnlockAll(boxes):
-    n = len(boxes)
-    unlocked = [False] * n
-    unlocked[0] = True  # The first box is initially unlocked
-    # Use a stack to keep track of boxes to explore
-    stack = [0]
+from typing import List
 
-    while stack:
-        box = stack.pop()
-        # Iterate through the keys in the current box
-        for key in boxes[box]:
-            if key < n and not unlocked[key]:
-                unlocked[key] = True
-                stack.append(key)
-    # Check if all boxes are unlocked
-    return all(unlocked)
+
+def canUnlockAll(boxes: List[List]) -> bool:
+    """
+    Determines if all the boxes can be opened.
+
+    Args:
+        boxes (list): A list of lists representing box and keys
+    Returns:
+        bool: True if all the boxes can be opened, False otherwise.
+    """
+    if not isinstance(boxes, list):
+        raise TypeError('Boxes should be a list')
+
+    key_list = [0]
+    for key in key_list:
+        for j in boxes[key]:
+            if j not in key_list and j < len(boxes):
+                key_list.append(j)
+    for i in range(len(boxes)):
+        if i not in key_list:
+            return False
+    return True
